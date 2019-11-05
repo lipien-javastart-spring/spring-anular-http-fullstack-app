@@ -7,7 +7,6 @@
 <body ng-controller="ProductController as prodControl">
 <h1>{{prodControl.appName}}</h1>
 <form>
-    <input type="text" ng-model="prodControl.product.id" placeholder="Id"><br>
     <input type="text" ng-model="prodControl.product.name" placeholder="Name"><br>
     <input type="text" ng-model="prodControl.product.producer" placeholder="Producer"><br>
     <input type="text" ng-model="prodControl.product.kcal" placeholder="kcal"><br>
@@ -27,7 +26,7 @@
     <p>Producent: {{prodControl.details.producer}}, Kcal: {{prodControl.details.kcal}} </p>
 </div>
 
-<script type="text/javascript" src="static/bower_components/angular/angular.jsbower_components/angular/angular.js"></script>
+<script type="text/javascript" src="static/bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="static/bower_components/angular-resource/angular-resource.js"></script>
 <script type="text/javascript" src="static/js/app.js"></script>
 </body>
