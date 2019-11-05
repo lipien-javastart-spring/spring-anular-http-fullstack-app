@@ -1,24 +1,32 @@
-angular.module('app', [])
-    .controller('ProductController', function($http) {
+angular.module('app', ['ngResource'])
+    .controller('ProductController', function($http, $resource) {
         var vm = this;
+        var Product = $resource('api/products/:productId');
+        vm.product = new Product();
+
         function refreshData() {
-            $http.get('api/products')
-                .then(function success(response) {
-                    vm.products = response.data;
-                }, function error(response) {
-                    console.log('API error ' + response.status);
+            vm.products = Product.query(
+                function success(data, headers) {
+                    console.log('Pobrano dane: ' +  data);
+                    console.log(headers('Content-Type'));
+                },
+                function error(reponse) {
+                    console.log(response.status); //np. 404
                 });
         }
 
         vm.addProduct = function(product) {
-            $http.post('api/products', product)
-                .then(function success(response) {
-                    refreshData();
-                    vm.product = {};
-                }, function error(response) {
-                    console.log('Data not saved ' + product);
-                });
+            console.log(vm.product.__proto__);
+            vm.product.$save(function(data) {
+                refreshData();
+                vm.product = new Product();
+            });
         }
+
+        vm.loadData = function(id) {
+            vm.details = Product.get({productId: id});
+        }
+
         vm.appName = 'Product Manager';
         refreshData();
     });

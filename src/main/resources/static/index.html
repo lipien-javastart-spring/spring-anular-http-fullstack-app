@@ -13,12 +13,21 @@
     <button ng-click="prodControl.addProduct(prodControl.product)">Add Product</button>
 </form>
 
+<!-- Lista produktów, na które można kliknąć -->
 <ul>
-    <li ng-repeat="prod in prodControl.products">
+    <li ng-repeat="prod in prodControl.products" ng-click="prodControl.loadData(prod.id)">
         {{prod.name}} - {{prod.producer}} ({{prod.kcal}} kcal)
     </li>
 </ul>
+
+<!-- Wyświetlanie szczegółów -->
+<div ng-show="prodControl.details">
+    <h2>{{prodControl.details.name}}</h2>
+    <p>Producent: {{prodControl.details.producer}}, Kcal: {{prodControl.details.kcal}} </p>
+</div>
+
 <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
